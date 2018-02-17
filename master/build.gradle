@@ -1,0 +1,36 @@
+/**
+ * Multiproject builds
+ */
+
+ext.projectIds = [
+		group : 'po.inc'
+		, version : '0.1'
+	]
+
+allprojects {
+	group = projectIds.group
+	version =projectIds.version
+}
+
+subprojects {
+	apply plugin: 'java'
+	apply plugin: 'eclipse'
+
+	repositories {
+	    mavenCentral()
+	}
+
+	dependencies {
+	    // This dependency is found on compile classpath of this component and consumers.
+	    compile 'com.google.guava:guava:23.0'
+
+	    // Use JUnit test framework
+	    testCompile 'junit:junit:4.12'
+	}
+}
+
+task hi() {
+	doLast {
+		println 'from model build'
+	}
+}

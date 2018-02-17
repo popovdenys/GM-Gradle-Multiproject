@@ -1,0 +1,15 @@
+/**
+ * Web project
+ */
+
+apply plugin: 'war'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile project(':repository')
+    // Use servlet api
+    providedCompile 'javax:javaee-web-api:8.0'
+}

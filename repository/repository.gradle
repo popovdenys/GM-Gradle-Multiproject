@@ -1,0 +1,13 @@
+/**
+ * Repository project
+ */
+
+dependencies {
+    compile project(':model')
+}
+
+task hi {
+	doLast {
+		println 'from repository build'
+	}
+}

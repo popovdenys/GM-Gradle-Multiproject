@@ -1,0 +1,9 @@
+/**
+ * Model project
+ */
+
+task hi(dependsOn: ':repository:hi') {
+	doLast {
+		println 'from model build'
+	}
+}
