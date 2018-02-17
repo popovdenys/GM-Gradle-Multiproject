@@ -1,0 +1,28 @@
+# temp files
+*~
+
+# Gradle Model
+model/build/
+
+# Gradle Repository
+repository/build/
+
+# Gradle Web
+web/build/
+
+# Gradle's plugins
+master/buildSrc/build/
+master/buildSrc/.gradle/
+master/.gradle/
+
+# Maven (ToDo : split up between projects )
+target/
+
+# Eclipse (ToDo : split up between projects )
+bin/
+.settings/
+.project
+.classpath
+
+# reserve (ToDo : split up between projects )
+out/
