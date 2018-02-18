@@ -14,6 +14,7 @@ web/build/
 master/buildSrc/build/
 master/buildSrc/.gradle/
 master/.gradle/
+.gradle/
 
 # Maven (ToDo : split up between projects )
 target/
@@ -23,6 +24,10 @@ bin/
 .settings/
 .project
 .classpath
+
+# Idea
+.idea/
+**/*.iml
 
 # reserve (ToDo : split up between projects )
 out/
