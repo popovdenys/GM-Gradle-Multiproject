@@ -13,3 +13,14 @@ dependencies {
     // Use servlet api
     providedCompile 'javax:javaee-web-api:8.0'
 }
+
+task copyToTomcat(type: Copy, group: 'deploy', description: 'deploy to Apache Tamcat') {
+    from war.outputs.files
+    into "${System.properties['user.home']}/apache-tomcat/v9.0.4/webapps"
+    rename { String fileName ->
+        'galaxy.war'
+    }
+    doLast {
+        println 'deploy to Apache Tomcat'
+    }
+}

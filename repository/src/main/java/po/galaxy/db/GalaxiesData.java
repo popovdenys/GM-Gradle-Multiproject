@@ -39,13 +39,12 @@ public class GalaxiesData {
 		galaxies.add(new Galaxy(12, "M91", "SBb", "Coma Berenices"));
 		galaxies.add(new Galaxy(13, "M95", "SBb", "Leo"));
 		galaxies.add(new Galaxy(14, "M109", "SBb", "Ursa Major"));
-		galaxies.add(new Galaxy(15, "NGC 1300", "SBbc", "Eridanus"));
-		galaxies.add(new Galaxy(16, "NGC 1365", "SBc", "Fornax"));
-		galaxies.add(new Galaxy(17, "NGC 2217", "SBa", "Canis Major"));
-		galaxies.add(new Galaxy(18, "Magellanic Clouds", "SBm", "Dorado, Tucana"));
-		galaxies.add(new Galaxy(19, "UGC 12158", "SB", "Pegasus"));
-		galaxies.add(new Galaxy(20, "NGC 1512", "SB(r)ab", "Horologium"));
-		galaxies.add(new Galaxy(21, "IC 5201", "SB", "Grus"));
+		galaxies.add(new Galaxy(15, "NGC 1365", "SBc", "Fornax"));
+		galaxies.add(new Galaxy(16, "NGC 2217", "SBa", "Canis Major"));
+		galaxies.add(new Galaxy(17, "Magellanic Clouds", "SBm", "Dorado, Tucana"));
+		galaxies.add(new Galaxy(18, "UGC 12158", "SB", "Pegasus"));
+		galaxies.add(new Galaxy(19, "NGC 1512", "SB(r)ab", "Horologium"));
+		galaxies.add(new Galaxy(20, "IC 5201", "SB", "Grus"));
 	}
 	
 	public List<Galaxy> getAllGalaxies() {
@@ -66,6 +65,12 @@ public class GalaxiesData {
 	public static Predicate<? super Galaxy> byId(int id) {
 		
 		return (Galaxy galaxy) -> galaxy.getId() == id;
+	}
+
+	public static int randomId() {
+	    int limitIdWith = new GalaxiesData().galaxies.size() - 1;
+//        Double foundId = SecureRandom.getInstanceStrong().nextDouble();   // ToDo ??? nextDouble() <=> nextInt()
+        return (int)(Math.random() * limitIdWith);
 	}
 
 }

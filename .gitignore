@@ -1,14 +1,9 @@
 # temp files
 *~
 
-# Gradle Model
-model/build/
-
-# Gradle Repository
-repository/build/
-
-# Gradle Web
-web/build/
+# Submodules' build
+**/build/
+**/out/
 
 # Gradle's plugins
 master/buildSrc/build/
