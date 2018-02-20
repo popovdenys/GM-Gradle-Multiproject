@@ -1,21 +1,21 @@
 <%--
-  File : index.jsp
+  File : galaxy.jsp
   Description : welcome list of all galaxies
 
   Author : Popov Denys
   Created : 19/02/18
 
-  Modified : { date: 19/02/18
-              ,time: 5:32 PM }
+  Modified : { date: 20/02/18
+              ,time: 12:59 PM }
   Modified by: Popov Denys
 
-  Last modification : list of galaxies
+  Last modification : jstl added
 --%>
-<%@ page import="po.galaxy.db.GalaxiesData" %>
-<%@ page import="po.galaxy.domain.Galaxy" %>
-<%@ page import="java.util.List" %>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <title>Univers</title>
@@ -24,15 +24,10 @@
 <body>
     <h2>Known Galaxies</h2>
     <ul>
-        <%
-            List<Galaxy> galaxies = (List<Galaxy>) request.getAttribute("galaxies");
 
-            for (Galaxy galaxy: galaxies) {
-        %>
-                <li><%=galaxy.toString()%></li>
-        <%
-            }
-        %>
+        <c:forEach items="${galaxies}" var="galaxy">
+            <li>${galaxy}</li>
+        </c:forEach>
 
     </ul>
 

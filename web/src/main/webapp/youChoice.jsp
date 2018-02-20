@@ -1,12 +1,21 @@
-<%@ page import="po.galaxy.domain.Galaxy" %>
-<%@ page import="java.util.List" %><%--
-  Created by IntelliJ IDEA.
-  User: popov
-  Date: 19/02/18
-  Time: 11:58 PM
-  To change this template use File | Settings | File Templates.
+<%--
+  File : youChoice.jsp
+  Description : list of choosen Galaxies
+
+  Author : Popov Denys
+  Created : 19/02/18
+
+  Modified : { date: 20/02/18
+              ,time: 12:58 PM }
+  Modified by: Popov Denys
+
+  Last modification : jstl added
 --%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <title>Univers</title>
@@ -16,21 +25,17 @@
     <h2>Choosen Galaxies</h2>
     <ul>
         <%
-            List<Galaxy> choosenGalaxies = (List<Galaxy>) session.getAttribute("choosenGalaxies");
-
             // int[] choosenCount = {0};
             // choosenGalaxies.stream().peek(g->++choosenCount[0]).forEach(Pattern.infoListNote(out));
+        %>
 
-            for (Galaxy galaxy: choosenGalaxies) {
-        %>
-            <li><%=galaxy.toString()%></li>
-        <%
-            }
-        %>
+        <c:forEach items="${choosenGalaxies}" var="galaxy">
+            <li>${galaxy}</li>
+        </c:forEach>
 
     </ul>
 
-    <p><span><%=choosenGalaxies.size()%> Galaxies in total</span></p>
+    <p><span>${choosenGalaxies.size()} Galaxies in total</span></p>
 
     <jsp:include page="footer.jsp"/>
 

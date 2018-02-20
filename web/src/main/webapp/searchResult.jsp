@@ -1,18 +1,21 @@
-<%@ page import="po.galaxy.domain.Galaxy" %>
-<%@ page import="java.util.List" %><%--
+<%--
   File : searchResult.jsp
   Description : search result page
 
   Author : Popov Denys
   Created : 19/02/18
 
-  Modified : { date: 19/02/18
-              ,time: 11:37 PM }
+  Modified : { date: 20/02/18
+              ,time: 12:58 PM }
   Modified by: Popov Denys
 
-  Last modification : list of found galaxies
+  Last modification : jstl added
 --%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <title>Univers</title>
@@ -21,23 +24,12 @@
     <h3>Found route</h3>
 
     <ul>
-        <%
-            List<Galaxy> foundGalaxies = (List<Galaxy>) request.getAttribute("foundGalaxies");
-
-            Integer countOfGalaxies = (Integer) request.getAttribute("countOfGalaxies");
-            //foundGalaxies.stream().forEach(Pattern.infoListNoteJSP());
-
-            for (Galaxy galaxy: foundGalaxies) {
-        %>
-            <li><%=galaxy.toString()%></li>
-        <%
-            }
-        %>
-
+        <c:forEach items="${foundGalaxies}" var="galaxy">
+            <li>${galaxy}</li>
+        </c:forEach>
     </ul>
 
-
-    <p><span><%=countOfGalaxies%> Galaxies in total</span></p>
+    <p><span>${foundGalaxies.size()} Galaxies in total</span></p>
 
     <jsp:include page="footer.jsp"/>
 </body>

@@ -1,13 +1,21 @@
-<%@ page import="po.galaxy.domain.Pattern" %>
-<%@ page import="java.util.List" %>
-<%@ page import="po.galaxy.domain.Galaxy" %><%--
-  Created by IntelliJ IDEA.
-  User: popov
-  Date: 19/02/18
-  Time: 11:15 PM
-  To change this template use File | Settings | File Templates.
+<%--
+  File : choosen.jsp
+  Description : List of Galaxies to choose
+
+  Author : Popov Denys
+  Created : 19/02/18
+
+  Modified : { date: 20/02/18
+              ,time: 12:58 PM }
+  Modified by: Popov Denys
+
+  Last modification : jstl added
 --%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <title>Univers</title>
@@ -16,17 +24,10 @@
     <h2>Known Galaxies</h2>
     <form action="choosenRoute.html" method="POST">
         <ul>
-            <%
-                List<Galaxy> choosenGalaxies = (List<Galaxy>) request.getAttribute("galaxiesOfChoice");
 
-                //galaxies.stream().forEach(Pattern.inputGalaxyNoteJSP(Pattern.InputType.CHECKBOX.get()));
-
-                for (Galaxy galaxy: choosenGalaxies) {
-            %>
-                    <li><%=galaxy.toString()%><input type='checkbox' name='galaxy-<%=galaxy.getId()%>'></li>
-            <%
-                }
-            %>
+            <c:forEach items="${galaxiesOfChoice}" var="galaxy">
+                <li>${galaxy}<input type='checkbox' name='galaxy-${galaxy.id}'></li>
+            </c:forEach>
         </ul>
 
         <input type="submit" value="Make my choise">
