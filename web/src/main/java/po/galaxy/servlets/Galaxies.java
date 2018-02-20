@@ -17,7 +17,6 @@ import po.galaxy.db.GalaxiesData;
 import po.galaxy.domain.Galaxy;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,13 +30,7 @@ public class Galaxies extends HttpServlet {
 
 	private static final long serialVersionUID = 2694378448176264111L;
 
-	private ServletContext servletContext;
-
 	public void init() {}
-
-    public void setServletContext(ServletContext servletContext) {
-        this.servletContext = servletContext;
-    }
 
     @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -47,7 +40,7 @@ public class Galaxies extends HttpServlet {
 
         request.setAttribute("galaxies", galaxies);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/galaxy.jsp");
 
         dispatcher.forward(request, response);
 	}

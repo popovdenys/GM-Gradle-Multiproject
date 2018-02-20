@@ -33,6 +33,11 @@ public class Pattern {
 		return g -> String.format("<li>%s</li>", g.toString());
 	}
 
+	public static Consumer<? super Galaxy> inputGalaxyNoteJSP(String type) {
+		return g -> String.format("<li>%s<input type='%s' name='galaxy-%d'></li>", g, type, g.getId());
+	}
+
+
 	/**
 	 * Templates for Servlets
 	 * @param out

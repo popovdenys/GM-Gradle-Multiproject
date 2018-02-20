@@ -1,3 +1,17 @@
+/*
+ * File : RouteControlerFilter.java
+ * Description : Redirect to definit pages
+ *
+ * Author : Popov Denys
+ * Created : 19/02/18
+ *
+ * Modified : { date: 19/02/18
+ *             ,time: 10:46 PM }
+ * Modified by: Popov Denys
+ *
+ * Last modification : welcome list of Galaxies
+ */
+
 package po.galaxy.filters;
 
 import po.galaxy.servlets.Galaxies;
@@ -20,7 +34,7 @@ public class RouteControlerFilter implements Filter {
 
         System.out.println( "Requested : " + requestedPath);
 
-        if (requestedPath.endsWith("index.jsp")) {
+        if (requestedPath.endsWith("galaxy.jsp")) {
 
             String redirectTo = "galaxy.html";
 

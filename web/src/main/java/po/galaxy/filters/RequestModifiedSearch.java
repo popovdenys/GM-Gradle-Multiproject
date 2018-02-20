@@ -1,3 +1,17 @@
+/**
+ * File : RequestModifiedSearch.java
+ * Description : wrapper for Search filter
+ *
+ * Author : Popov Denys
+ * Created : 19/02/18
+ *
+ * Modified : { date: 19/02/18
+ *             ,time: 10:45 PM }
+ * Modified by: Popov Denys
+ *
+ * Last modification : modify param value
+ */
+
 package po.galaxy.filters;
 
 import javax.servlet.http.HttpServletRequest;

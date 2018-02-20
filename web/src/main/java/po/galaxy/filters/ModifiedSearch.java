@@ -1,3 +1,17 @@
+/**
+ * File : ModifiedSearch.java
+ * Description : search filter
+ *
+ * Author : Popov Denys
+ * Created : 19/02/18
+ *
+ * Modified : { date: 19/02/18
+ *             ,time: 10:42 PM }
+ * Modified by: Popov Denys
+ *
+ * Last modification : replace 'home' with random choice
+ */
+
 package po.galaxy.filters;
 
 import po.galaxy.db.GalaxiesData;

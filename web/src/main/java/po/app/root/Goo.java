@@ -12,13 +12,13 @@
 
 package po.app.root;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 @WebServlet("/index.html")
 public class Goo extends HttpServlet {
@@ -27,13 +27,10 @@ public class Goo extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
-		response.setContentType("text/html");
-		out.println("<h1>Design Patterns & Paradigms</h1>");
-		out.print("<ul>");
-		out.println("<li><a href=\"galaxy.html\">Post-Redirect-Get</a></li>");
-		out.print("</ul>");
-		out.close();
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+
+		dispatcher.forward(request, response);
 	}
 
 }
