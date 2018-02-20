@@ -17,6 +17,8 @@ subprojects {
 	apply plugin: 'eclipse'
 	apply plugin: 'idea'
 
+	sourceCompatibility = 1.9
+
 	repositories {
 		mavenCentral()
 	}

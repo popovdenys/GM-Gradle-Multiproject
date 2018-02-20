@@ -24,7 +24,21 @@ public class Pattern {
 		};
 		public abstract String get();
 	}
-	
+
+	/**
+	 * Templates for JSP pages
+	 * @return
+	 */
+	public static Consumer<Object> infoListNoteJSP() {
+		return g -> String.format("<li>%s</li>", g.toString());
+	}
+
+	/**
+	 * Templates for Servlets
+	 * @param out
+	 * @return
+	 */
+
 	public static Consumer<Object> infoListNote(PrintWriter out) {
 		return g -> out.println("<li>" + g + "</li>");
 	}

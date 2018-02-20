@@ -15,8 +15,15 @@ package po.galaxy.db;
 
 import po.galaxy.domain.Galaxy;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.Callable;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -46,31 +53,102 @@ public class GalaxiesData {
 		galaxies.add(new Galaxy(19, "NGC 1512", "SB(r)ab", "Horologium"));
 		galaxies.add(new Galaxy(20, "IC 5201", "SB", "Grus"));
 	}
-	
+
+	/**
+	 * DAO methods
+	 * @return
+	 */
+
+	// get all notes
+
 	public List<Galaxy> getAllGalaxies() {
 		return galaxies;
 	}
-	
+
+	// find specific note
+
 	public List<Galaxy> find(Predicate<? super Galaxy> criteria) {
 		
 		return galaxies.stream().filter(criteria).collect(Collectors.toList());
 		
 	}
-	
+
+	/**
+	 * SEARCH CRITERIA
+ 	 */
+
+	// by Name
+
 	public static Predicate<? super Galaxy> byName(String searchCriteria) {
 		
 		return (Galaxy galaxy) -> galaxy.getName().toLowerCase().contains(searchCriteria.toLowerCase());
 	}
-	
+
+	// by Id
+
 	public static Predicate<? super Galaxy> byId(int id) {
 		
 		return (Galaxy galaxy) -> galaxy.getId() == id;
 	}
 
-	public static int randomId() {
+	/**
+	 * GET RANDOM ID SECTION
+	 * @return Map<Integer, String>(RandomId, MathodName)
+	 */
+
+	// Math.random
+
+	public static Callable<Map<Integer, String>> randomId() {
 	    int limitIdWith = new GalaxiesData().galaxies.size() - 1;
-//        Double foundId = SecureRandom.getInstanceStrong().nextDouble();   // ToDo ??? nextDouble() <=> nextInt()
-        return (int)(Math.random() * limitIdWith);
+        return () -> {
+            Map<Integer, String> result = new HashMap<>();
+            result.put((int)(Math.random() * limitIdWith), "randomId");
+            return result;
+        };
 	}
+
+	// SecureRandom
+
+    public static Callable<Map<Integer, String>> secureRandomId() throws NoSuchAlgorithmException {
+
+        SecureRandom algo = SecureRandom.getInstance("SHA1PRNG");
+
+        int limitIdWith = new GalaxiesData().galaxies.size() - 1;
+        return () -> {
+            Map<Integer, String> result = new HashMap<>();
+            result.put(algo.nextInt(limitIdWith), "secureRandomId");
+            return result;
+        };
+
+    }
+
+    // random tester mathod
+
+    public static Map<Integer, Long> randomIdTester(Callable<Map<Integer, String>> getRandomMap) throws Exception {
+
+        System.out.println("Start looking for random id ... ");
+
+	    Map<Integer, Long> result = new HashMap<>();
+
+        Instant beginsWith = Instant.now();
+
+        Map<Integer, String> randomMap = getRandomMap.call();
+
+        int foundId = randomMap.entrySet().iterator().next().getKey();
+
+        Instant endsWith = Instant.now();
+
+        Duration itTook = Duration.between(beginsWith, endsWith);
+
+        result.put(foundId, itTook.toNanos());
+
+        System.out.println(result);
+
+        System.out.println(String.format("%s was accomplished in %d nanosec with the result id equals %d%n"
+                , randomMap.entrySet().iterator().next().getValue(), itTook.toNanos(), foundId));
+
+        return result;
+
+    }
 
 }
