@@ -46,7 +46,7 @@ public class FinalizeChoice extends HttpServlet {
 
 	private void dispatchToResultPage(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/youChoice.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/youChoice.jsp");
 
 		dispatcher.forward(request, response);
 

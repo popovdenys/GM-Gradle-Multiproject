@@ -18,7 +18,7 @@ import java.util.function.Consumer;
 
 public class Pattern {
 	
-	public static enum InputType {
+	public enum InputType {
 		CHECKBOX{public String get() { return "checkbox";}
 		}, SUBMIT{public String get() { return "submit";}
 		};

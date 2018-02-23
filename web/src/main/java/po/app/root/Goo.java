@@ -28,7 +28,7 @@ public class Goo extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/index.jsp");
 
 		dispatcher.forward(request, response);
 	}

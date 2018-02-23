@@ -43,7 +43,7 @@ public class GalaxySearch extends HttpServlet {
 		request.setAttribute("foundGalaxies", foundGalaxies);
 		request.setAttribute("countOfGalaxies", foundGalaxies.size());
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/searchResult.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/searchResult.jsp");
 
 		dispatcher.forward(request, response);
 	}

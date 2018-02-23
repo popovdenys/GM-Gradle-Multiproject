@@ -16,18 +16,22 @@ package po.galaxy.domain;
 public class Galaxy {
 	private int id;
 	private String name;
-	private String type;
+	private GalaxyType type;
 	private String constellation;
+	private double distance;
+	private String image;
 	
 	public Galaxy() {
 	}
 	
-	public Galaxy(int id, String name, String type, String constellation) {
+	public Galaxy(int id, String name, GalaxyType type, String constellation, double distance, String image) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.type = type;
 		this.constellation = constellation;
+		this.distance = distance;
+		this.image = image;
 	}
 	
 	public int getId() {
@@ -42,19 +46,25 @@ public class Galaxy {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getType() {
+	public GalaxyType getType() {
 		return type;
 	}
-	public void setType(String type) {
+	public void setType(GalaxyType type) {
 		this.type = type;
 	}
-	
+	public double getDistance() {return distance;}
+	public void setDistance(double distance) {this.distance = distance;}
 	public String getConstellation() {
 		return constellation;
 	}
-
 	public void setConstellation(String constellation) {
 		this.constellation = constellation;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image= image;
 	}
 
 	@Override

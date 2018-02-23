@@ -33,11 +33,11 @@ public class GalaxiesOfChoice extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		List<Galaxy> galaxies = new GalaxiesData().getAllGalaxies();
+		List<Galaxy> galaxies = new GalaxiesData().getGalaxiesList();
 		
 		request.setAttribute("galaxiesOfChoice", galaxies);
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/choose.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/choose.jsp");
 
 		dispatcher.forward(request, response);
 		

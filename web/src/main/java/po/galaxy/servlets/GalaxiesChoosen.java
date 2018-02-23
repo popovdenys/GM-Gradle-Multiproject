@@ -38,7 +38,7 @@ public class GalaxiesChoosen extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		
-		List<Galaxy> galaxies = new GalaxiesData().getAllGalaxies();
+		List<Galaxy> galaxies = new GalaxiesData().getGalaxiesList();
 		
 		List<? super Galaxy> galaxiesOfChoice = galaxies.stream()
 												.filter(g-> {

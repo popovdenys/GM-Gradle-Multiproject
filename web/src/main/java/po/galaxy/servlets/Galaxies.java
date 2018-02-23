@@ -35,12 +35,12 @@ public class Galaxies extends HttpServlet {
     @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        List<Galaxy> galaxies = new GalaxiesData().getAllGalaxies();
+        List<Galaxy> galaxies = new GalaxiesData().getGalaxiesList();
 		//galaxies.stream().forEach(Pattern.infoListNote(out));
 
         request.setAttribute("galaxies", galaxies);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/galaxy.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/galaxy.jsp");
 
         dispatcher.forward(request, response);
 	}

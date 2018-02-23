@@ -23,6 +23,8 @@ bin/
 # Idea
 .idea/
 **/*.iml
+*.ipr
+*.iws
 
 # reserve (ToDo : split up between projects )
 out/
