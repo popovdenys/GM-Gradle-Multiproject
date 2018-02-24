@@ -21,8 +21,13 @@
     <title>Univers</title>
 </head>
 <body>
-    <h2>Known Galaxies</h2>
+    <h2>Create new Expedition from</h2>
+    <h2>known Galaxies</h2>
+
     <form action="choosenRoute.html" method="POST">
+
+        <input type="text" name="contractor" />
+
         <ul>
 
             <c:forEach items="${galaxiesOfChoice}" var="galaxy">

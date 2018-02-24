@@ -17,16 +17,31 @@ package po.galaxy.db;
 import po.galaxy.domain.Expedition;
 import po.galaxy.domain.Galaxy;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 public interface Dao {
+
+    public List<Expedition> getExpeditionsList();
+
+    public List<Galaxy> createMap(ResultSet results) throws SQLException;
+
+    public List<Galaxy> addNxtGalaxy(ResultSet results) throws SQLException;
+
     public List<Galaxy> getGalaxiesList();
 
-    public List<Galaxy> findById(int id);
+    public Galaxy getGalaxyById(long id);
 
-    public List<Galaxy> findByName(String name);
+    public List<Galaxy> getGalaxiesByName(String name);
 
-    public Expedition startExpedition(Character client);
+    public Expedition setExpedition(String contractor);
 
-    public Double getTotalDistance(int id);
+    public void addToExpedition(Long id, Galaxy galaxy);
+
+    public void updateExpeditionStatus(Long id, String status);
+
+    public Double getExpetionTotalDistance(Long id);
+
+    public Expedition getExpedition(Long id);
 }

@@ -46,8 +46,9 @@ public class GalaxiesData {
 	public static final String INSERT_INTO_GALAXIES_TABLE = "INSERT INTO galaxies (id, name, type, constellation, distance, image) VALUES (?, ?, ?, ?, ?, ?)";
 	public static final String CREATE_EXPEDITIONS_TABLE = "CREATE TABLE expeditions (" +
             "id INT AUTO_INCREMENT PRIMARY KEY" +
-            ", itinerary VARCHAR(255)" +
-            ", status VARCHAR(28))";
+            ", itinerary VARBINARY" +
+            ", status VARCHAR(28)" +
+            ", contractor VARCHAR(17))";
 
 	private List<Galaxy> galaxies;
 
@@ -62,7 +63,12 @@ public class GalaxiesData {
 	 */
 
 	public void initDB() {
-		try(Connection conn = DriverManager.getConnection(h2GalaxyUrl, "", "")) {
+        try {
+            Class.forName("org.h2.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try(Connection conn = DriverManager.getConnection(h2GalaxyUrl, "", "")) {
 			try (PreparedStatement ps = conn.prepareStatement(DROP_TABLE_GALAXIES)) {
 				ps.execute();
 			}
@@ -77,12 +83,12 @@ public class GalaxiesData {
 
 			galaxies = getGalaxiesList();
 
-			galaxies.stream().forEach(galaxy->{
+			galaxies.stream().forEach( galaxy -> {
 
 				try(PreparedStatement ps = conn.prepareStatement(INSERT_INTO_GALAXIES_TABLE);) {
-					ps.setInt(1, galaxy.getId());
+					ps.setLong(1, galaxy.getId());
 					ps.setString(2, galaxy.getName());
-					ps.setString(3, galaxy.getType().get());
+					ps.setString(3, galaxy.getType().toString());
 					ps.setString(4, galaxy.getConstellation());
 					ps.setDouble(5, galaxy.getDistance());
 					ps.setString(6, galaxy.getImage());

@@ -12,4 +12,4 @@
   Last modification : pages' footer
 --%>
 
-<a href="search.html">Find your route</a> | <a href="choose.html">Make your choice</a>
+<a href="search.html">Find your route</a> | <a href="choose.html">Make your choice</a> | <a href="galaxy.html">All galaxies</a>

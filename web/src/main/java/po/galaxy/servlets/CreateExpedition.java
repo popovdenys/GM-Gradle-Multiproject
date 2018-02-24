@@ -26,7 +26,7 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/choose.html")
-public class GalaxiesOfChoice extends HttpServlet {
+public class CreateExpedition extends HttpServlet {
 
 	private static final long serialVersionUID = 2173022719737730840L;
 

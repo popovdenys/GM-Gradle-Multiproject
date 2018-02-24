@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/index.html")
+@WebServlet("")
 public class Goo extends HttpServlet {
 
 	private static final long serialVersionUID = 3180054384041117662L;

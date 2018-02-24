@@ -14,7 +14,7 @@
 package po.galaxy.domain;
 
 public class Galaxy {
-	private int id;
+	private long id;
 	private String name;
 	private GalaxyType type;
 	private String constellation;
@@ -24,7 +24,7 @@ public class Galaxy {
 	public Galaxy() {
 	}
 	
-	public Galaxy(int id, String name, GalaxyType type, String constellation, double distance, String image) {
+	public Galaxy(long id, String name, GalaxyType type, String constellation, double distance, String image) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -34,10 +34,10 @@ public class Galaxy {
 		this.image = image;
 	}
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getName() {

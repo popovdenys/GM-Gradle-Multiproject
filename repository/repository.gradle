@@ -8,7 +8,7 @@ repositories {
 
 dependencies {
     compile project(':model')
-    testCompile 'com.h2database:h2:1.4.196'
+    compile 'com.h2database:h2:1.4.196'
 }
 
 task hi {

@@ -19,6 +19,27 @@
 <html>
 <head>
     <title>Univers</title>
+    <script type="application/javascript">
+        function updateExpeditionStatus() {
+            var request = new XMLHttpRequest();
+            request.onreadystatechange = function (ev) {
+                if(this.readyState == 4) {
+                    var json = JSON.parse(this.responseText);
+                    document.getElementById("status").innerHTML = json.status;
+                    document.getElementById("time").innerHTML = "Last updated at " + json.time;
+                }
+            }
+
+            request.open("get", "/updatedExpeditionStatus?id=${id}", true);
+            request.end();
+        }
+
+        window.setInterval(
+            function () {
+                updateExpeditionStatus();
+            }, 5000);
+
+    </script>
 </head>
 <body>
 
@@ -36,6 +57,9 @@
     </ul>
 
     <p><span>${choosenGalaxies.size()} Galaxies in total</span></p>
+
+    <p>The current status of expedition is <span id="status">${status}</span> <input type="button" value="refresh status" onclick="updateExpeditionStatus()" /></p>
+    <p>Total distance is ${totalDistance} mly</p>
 
     <jsp:include page="footer.jsp"/>
 

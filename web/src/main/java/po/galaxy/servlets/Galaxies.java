@@ -13,6 +13,7 @@
 
 package po.galaxy.servlets;
 
+import po.galaxy.db.GalaxiesDAO;
 import po.galaxy.db.GalaxiesData;
 import po.galaxy.domain.Galaxy;
 
@@ -37,6 +38,8 @@ public class Galaxies extends HttpServlet {
 
         List<Galaxy> galaxies = new GalaxiesData().getGalaxiesList();
 		//galaxies.stream().forEach(Pattern.infoListNote(out));
+
+        new GalaxiesDAO();
 
         request.setAttribute("galaxies", galaxies);
 

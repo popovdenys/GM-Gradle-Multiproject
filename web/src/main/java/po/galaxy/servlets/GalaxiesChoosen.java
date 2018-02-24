@@ -13,8 +13,11 @@
 
 package po.galaxy.servlets;
 
-import po.galaxy.db.GalaxiesData;
+import po.galaxy.db.GalaxiesDAO;
+import po.galaxy.db.GalaxiesDaoFactory;
+import po.galaxy.domain.Expedition;
 import po.galaxy.domain.Galaxy;
+import po.galaxy.domain.StatusType;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,21 +36,30 @@ public class GalaxiesChoosen extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		GalaxiesDAO galaxiesDAO = GalaxiesDaoFactory.getGalaxiesDAO();
 		
 		System.out.print("doPost->");
 		
 		HttpSession session = request.getSession();
 		
-		List<Galaxy> galaxies = new GalaxiesData().getGalaxiesList();
-		
+		List<Galaxy> galaxies = galaxiesDAO.getGalaxiesList();
+
+		Expedition expedition = galaxiesDAO.setExpedition( request.getParameter("contractor") );
+
+
 		List<? super Galaxy> galaxiesOfChoice = galaxies.stream()
-												.filter(g-> {
-													String status = request.getParameter("galaxy-" + g.getId());
-													return (status != null && status.equals("on")) ? true : false;
-												})
-												.collect(Collectors.toList());
+				.filter(g-> {
+					String status = request.getParameter("galaxy-" + g.getId());
+					return (status != null && status.equals("on")) ? true : false;
+				})
+				.peek(galaxy->galaxiesDAO.addToExpedition(expedition.getId(), galaxy))
+				.collect(Collectors.toList());
+
+		System.out.println(String.format("New expedition %s", StatusType.PROJECT.get()));
 
 		session.setAttribute("choosenGalaxies", galaxiesOfChoice);
+		session.setAttribute("expeditionId", expedition.getId());
 		
 		response.sendRedirect(response.encodeURL("youChoice.html"));
 		

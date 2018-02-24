@@ -13,6 +13,8 @@
 
 package po.galaxy.servlets;
 
+import po.galaxy.db.GalaxiesDAO;
+import po.galaxy.db.GalaxiesDaoFactory;
 import po.galaxy.domain.Galaxy;
 
 import javax.servlet.RequestDispatcher;
@@ -39,9 +41,21 @@ public class FinalizeChoice extends HttpServlet {
 		
 		List<? super Galaxy> choosenGalaxies = (List<? super Galaxy>) session.getAttribute("choosenGalaxies");
 
-		if (choosenGalaxies == null ) response.sendRedirect("choose.html");
-		else dispatchToResultPage(request, response);
-			
+		Long expeditionId = (Long) session.getAttribute("expeditionId");
+
+		GalaxiesDAO galaxiesDAO = GalaxiesDaoFactory.getGalaxiesDAO();
+
+		Double totalDistance = galaxiesDAO.getExpetionTotalDistance(expeditionId);
+		String status = galaxiesDAO.getExpedition(expeditionId).getStatus();
+
+		if (choosenGalaxies != null ) {
+			request.setAttribute("totalDistance", totalDistance);
+			request.setAttribute("status", status);
+			request.setAttribute("id", expeditionId);
+			dispatchToResultPage(request, response);
+		}
+		else  response.sendRedirect("choose.html");
+
 	}
 
 	private void dispatchToResultPage(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
