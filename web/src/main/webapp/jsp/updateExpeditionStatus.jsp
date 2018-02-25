@@ -1,13 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
-  File : updateExpeditionStatus.jsp
+  File : UpdateExpeditionStatus.jsp
   Description : update expedition status
 
   Author : Popov Denys
   Created : 23/02/18
 
   Modified : { date: 23/02/18
-              ,time: 20:19 PM }
+              ,time: 08:17 PM }
   Modified by: Popov Denys
 
   Last modification : update status form
@@ -17,27 +17,42 @@
 <html>
 <head>
     <title>Univers</title>
-    <link rel="stylesheet" type="text/css" href="../interface/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="interface/css/styles.css">
 </head>
 <body>
 <h2>Update Expedition status</h2>
 <table class="status">
-    <tr><th>Expedition id</th><th>Status</th></tr>
+    <tr><th>id</th><th>Destinations</th><th>Total distance<br/>(in Mly)</th><th>Contractor</th><th>Status</th></tr>
     <c:forEach items="${expeditions}" var="expedition">
         <tr>
             <td>${expedition.id}</td>
             <td>
+                <c:forEach items="${expedition.itinerary}" var="galaxy">
+                    <p>${galaxy.key}</p>
+                </c:forEach>
+            </td>
+            <td>
+                ${expedition.getExpeditionDistance(expedition.itinerary)}
+            </td>
+            <td>
+                ${expedition.contractor}
+            </td>
+            <td>
                 <form action="processexpedition.html" method="post">
+
                     <input type="hidden" name="id" value="${expedition.id}">
-                    <select name="status">
-                        <option value="${expedition.status}" selected>${expedition.status}</option>
-                        <c:forEach items="status" var="s">
-                            <c:if test="${!s.equals(expedition.status)}">
-                                <option value="${s}">${s}</option>
-                            </c:if>
-                        </c:forEach>
-                    </select>
-                    <input type="submit" value="Update">
+                    <div>
+                        <select name="status">
+                            <option value="${expedition.status}" selected>${expedition.status}</option>
+                            <c:forEach items="${status}" var="s">
+                                <c:if test="${!s.equals(expedition.status)}">
+                                    <option value="${s}">${s}</option>
+                                </c:if>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <div><input type="submit" value="Update"></div>
+
                 </form>
             </td>
         </tr>

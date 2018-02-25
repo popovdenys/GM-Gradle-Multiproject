@@ -45,9 +45,9 @@ task getExternalJQuery(type: Copy) {
 task copyToTomcat(type: Copy, group: 'deploy', description: 'deploy to Apache Tamcat') {
     dependsOn getExternalJQuery
     from war.outputs.files
-    into "${System.properties['user.home']}/apache-tomcat/v9.0.4/webapps"
+    into "${System.properties['user.home']}/apache-tomcat/v9.0.5/webapps"
     rename { String fileName ->
-        'galaxy.war'
+        'galaxy1.war'
     }
     doLast {
         println 'deploy to Apache Tomcat'

@@ -5,11 +5,11 @@
   Author : Popov Denys
   Created : 19/02/18
 
-  Modified : { date: 20/02/18
-              ,time: 12:58 PM }
+  Modified : { date: 24/02/18
+              ,time: 07:46 PM }
   Modified by: Popov Denys
 
-  Last modification : jstl added
+  Last modification : expedition info, plus refresh status
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -21,24 +21,29 @@
     <title>Univers</title>
     <script type="application/javascript">
         function updateExpeditionStatus() {
+
             var request = new XMLHttpRequest();
-            request.onreadystatechange = function (ev) {
+
+            request.onreadystatechange = function () {
+
                 if(this.readyState == 4) {
                     var json = JSON.parse(this.responseText);
                     document.getElementById("status").innerHTML = json.status;
                     document.getElementById("time").innerHTML = "Last updated at " + json.time;
                 }
+
             }
 
-            request.open("get", "/updatedExpeditionStatus?id=${id}", true);
-            request.end();
-        }
+            request.open("GET", "updatedExpeditionStatus?id=${id}", true);
+            request.send();
 
+        }
+/*
         window.setInterval(
             function () {
                 updateExpeditionStatus();
-            }, 5000);
-
+            }, 15000);
+*/
     </script>
 </head>
 <body>
@@ -58,10 +63,12 @@
 
     <p><span>${choosenGalaxies.size()} Galaxies in total</span></p>
 
-    <p>The current status of expedition is <span id="status">${status}</span> <input type="button" value="refresh status" onclick="updateExpeditionStatus()" /></p>
+    <p>The current status of expedition is <b><span id="status">${status}</span></b> <input type="button" value="refresh status" onclick="updateExpeditionStatus()" /></p>
+    <p id="time"></p>
+
     <p>Total distance is ${totalDistance} mly</p>
 
-    <jsp:include page="footer.jsp"/>
+    <jsp:include page="footer.jsp"/> | <a href="processexpedition.html">Set new status</a>
 
 </body>
 </html>

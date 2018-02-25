@@ -4,16 +4,19 @@
  * 
  * Author : Popov Denys
  * Created : 01 Feb, 2018
- * 
- * Modified : 01 Feb, 2018
+ *
+ * Modified : { date: 24/02/18
+ *             ,time: 20:05 PM }
  * Modified by: Popov Denys
  * 
- * Last modification : Galaxy object  
+ * Last modification : make object Serializable
  */
 
 package po.galaxy.domain;
 
-public class Galaxy {
+import java.io.Serializable;
+
+public class Galaxy implements Serializable {
 	private long id;
 	private String name;
 	private GalaxyType type;

@@ -5,21 +5,21 @@
  * Author : Popov Denys
  * Created : 20/02/18
  *
- * Modified : { date: 23/02/18
- *             ,time: 12:00 PM }
+ * Modified : { date: 24/02/18
+ *             ,time: 8:06 PM }
  * Modified by: Popov Denys
  *
- * Last modification : Expedition object
+ * Last modification : itinerary to LinkedHashMap
  */
 
 package po.galaxy.domain;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class Expedition {
     private long id;
-    private Map<Galaxy, Double> itinerary = new ConcurrentHashMap<>();
+    private Map<Galaxy, Double> itinerary = new LinkedHashMap<>();
     private String status;
     private String contractor;
 
@@ -43,6 +43,8 @@ public class Expedition {
     }
 
     public void setItinerary(Map<Galaxy, Double> expeditions) { this.itinerary = expeditions; }
+
+    public Map<Galaxy, Double> getItinerary() { return itinerary; }
 
     public void setContractor(String contractor) { this.contractor = contractor; }
 

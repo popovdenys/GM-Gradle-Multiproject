@@ -131,15 +131,14 @@ public class GalaxiesData {
 		galaxies.add(new Galaxy(10, "NGC 55", GalaxyType.SBM, "Sculptor", 7.2, ""));
 		galaxies.add(new Galaxy(11, "Messier 58", GalaxyType.SABRSB, "Virgo", 62, ""));
 		galaxies.add(new Galaxy(12, "Messier 91", GalaxyType.SBB, "Coma Berenices", 63, ""));
-		galaxies.add(new Galaxy(13, "Messier 95", GalaxyType.SBB, "Leo", 32.6, ""));
-		galaxies.add(new Galaxy(14, "Messier 109", GalaxyType.SBB, "Ursa Major", 83.5, ""));
-		galaxies.add(new Galaxy(15, "NGC 1365", GalaxyType.SBBSB, "Fornax", 56.2, ""));
-		galaxies.add(new Galaxy(16, "NGC 2217", GalaxyType.SBA, "Canis Major", 65, ""));
-		galaxies.add(new Galaxy(17, "Large Magellanic Clouds", GalaxyType.SBM, "Dorado, Mensa", 0.16, ""));
-		galaxies.add(new Galaxy(18, "Small Magellanic Clouds", GalaxyType.SBM, "Tucana, Hydrus", 0.2, ""));
-		galaxies.add(new Galaxy(19, "UGC 12158", GalaxyType.SB, "Pegasus", 384, ""));
-		galaxies.add(new Galaxy(20, "NGC 1512", GalaxyType.SBRAB, "Horologium", 38, ""));
-		galaxies.add(new Galaxy(21, "IC 5201", GalaxyType.SB, "Grus", 40, ""));
+		galaxies.add(new Galaxy(13, "Messier 109", GalaxyType.SBB, "Ursa Major", 83.5, ""));
+		galaxies.add(new Galaxy(14, "NGC 1365", GalaxyType.SBBSB, "Fornax", 56.2, ""));
+		galaxies.add(new Galaxy(15, "NGC 2217", GalaxyType.SBA, "Canis Major", 65, ""));
+		galaxies.add(new Galaxy(16, "Large Magellanic Clouds", GalaxyType.SBM, "Dorado, Mensa", 0.16, ""));
+		galaxies.add(new Galaxy(17, "Small Magellanic Clouds", GalaxyType.SBM, "Tucana, Hydrus", 0.2, ""));
+		galaxies.add(new Galaxy(18, "UGC 12158", GalaxyType.SB, "Pegasus", 384, ""));
+		galaxies.add(new Galaxy(19, "NGC 1512", GalaxyType.SBRAB, "Horologium", 38, ""));
+		galaxies.add(new Galaxy(20, "IC 5201", GalaxyType.SB, "Grus", 40, ""));
 
 		return galaxies;
 	}

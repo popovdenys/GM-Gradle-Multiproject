@@ -25,7 +25,7 @@ public interface Dao {
 
     public List<Expedition> getExpeditionsList();
 
-    public List<Galaxy> createMap(ResultSet results) throws SQLException;
+    public List<Galaxy> createMap(ResultSet results);
 
     public List<Galaxy> addNxtGalaxy(ResultSet results) throws SQLException;
 

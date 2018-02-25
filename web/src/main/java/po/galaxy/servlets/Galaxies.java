@@ -4,8 +4,9 @@
  * 
  * Author : Popov Denys
  * Created : 30 Jan, 2018
- * 
- * Modified : 30 Jan, 2018
+ *
+ * Modified : { date: 30/01/18
+ *             ,time: 08:05 PM }
  * Modified by: Popov Denys
  * 
  * Last modification : welcome list of Galaxies

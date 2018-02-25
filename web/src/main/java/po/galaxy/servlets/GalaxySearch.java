@@ -4,8 +4,9 @@
  * 
  * Author : Popov Denys
  * Created : 03 Feb, 2018
- * 
- * Modified : 03 Feb, 2018
+ *
+ * Modified : { date: 24/02/18
+ *             ,time: 08:05 PM }
  * Modified by: Popov Denys
  * 
  * Last modification : result page of Galaxies search 

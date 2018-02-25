@@ -1,3 +1,17 @@
+/*
+ * File : UpdateExpeditionStatus.java
+ * Description : Update expedition status
+ *
+ * Author : Popov Denys
+ * Created : 23 Feb, 2018
+ *
+ * Modified : { date: 24/02/18
+ *             ,time: 08:17 PM }
+ * Modified by: Popov Denys
+ *
+ * Last modification : List of expeditions
+ */
+
 package po.galaxy.servlets;
 
 import po.galaxy.db.GalaxiesDAO;
@@ -16,12 +30,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/processexpedition.html")
-public class updateExpeditionStatus extends HttpServlet {
+public class UpdateExpeditionStatus extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         GalaxiesDAO galaxiesDAO = GalaxiesDaoFactory.getGalaxiesDAO();
 
         List<Expedition> expeditions = galaxiesDAO.getExpeditionsList();
+
         request.setAttribute("expeditions", expeditions);
 
         List<String> status = new ArrayList<>();
@@ -33,17 +48,19 @@ public class updateExpeditionStatus extends HttpServlet {
 
         request.setAttribute("status", status);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/updateExpeditionStatus.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/updateExpeditionStatus.jsp");
         dispatcher.forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         GalaxiesDAO galaxiesDAO = GalaxiesDaoFactory.getGalaxiesDAO();
         Long id = Long.valueOf(request.getParameter("id"));
         String status = request.getParameter("status");
 
         galaxiesDAO.updateExpeditionStatus(id, status);
         doGet(request, response);
+
     }
 }

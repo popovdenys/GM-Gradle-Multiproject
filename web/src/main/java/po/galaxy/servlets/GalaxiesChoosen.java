@@ -4,8 +4,9 @@
  * 
  * Author : Popov Denys
  * Created : 01 Feb, 2018
- * 
- * Modified : 01 Feb, 2018
+ *
+ * Modified : { date: 01/02/18
+ *             ,time: 08:05 PM }
  * Modified by: Popov Denys
  * 
  * Last modification : result of user's check 
@@ -47,7 +48,6 @@ public class GalaxiesChoosen extends HttpServlet {
 
 		Expedition expedition = galaxiesDAO.setExpedition( request.getParameter("contractor") );
 
-
 		List<? super Galaxy> galaxiesOfChoice = galaxies.stream()
 				.filter(g-> {
 					String status = request.getParameter("galaxy-" + g.getId());
@@ -56,13 +56,13 @@ public class GalaxiesChoosen extends HttpServlet {
 				.peek(galaxy->galaxiesDAO.addToExpedition(expedition.getId(), galaxy))
 				.collect(Collectors.toList());
 
-		System.out.println(String.format("New expedition %s", StatusType.PROJECT.get()));
+		System.out.println(String.format("New expedition's status %s", StatusType.PROJECT.get()));
 
 		session.setAttribute("choosenGalaxies", galaxiesOfChoice);
 		session.setAttribute("expeditionId", expedition.getId());
 		
 		response.sendRedirect(response.encodeURL("youChoice.html"));
-		
+
 	}
 
 }

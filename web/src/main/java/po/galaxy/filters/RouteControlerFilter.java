@@ -31,8 +31,8 @@ public class RouteControlerFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
         String requestedPath = ((HttpServletRequest)request).getRequestURI();
-
-        System.out.println( "Requested : " + requestedPath);
+        String requestedMethod = ((HttpServletRequest)request).getMethod();
+        String servletPath = ((HttpServletRequest)request).getServletPath();
 
         if (requestedPath.endsWith("galaxy.jsp")) {
 

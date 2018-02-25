@@ -19,24 +19,34 @@ import po.galaxy.domain.Galaxy;
 import po.galaxy.domain.GalaxyType;
 import po.galaxy.domain.StatusType;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 public class GalaxiesDAO implements Dao {
 
     public GalaxiesDAO() {
-        System.out.println("Initialize h2 database");
-        GalaxiesData galaxiesData = new GalaxiesData();
-        galaxiesData.initDB();
+//        System.out.println("Initialize h2 database");
+//        GalaxiesData galaxiesData = new GalaxiesData();
+//        galaxiesData.initDB();
     }
 
-    private final Connection getConnection() throws SQLException {
+    private final Connection getConnection() {
         try { Class.forName("org.h2.Driver");
         } catch (ClassNotFoundException e) { e.printStackTrace(); }
+        Connection connection = null;
+        try {
+            connection = DriverManager.getConnection(GalaxiesData.h2GalaxyUrl, "", "");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-        return DriverManager.getConnection(GalaxiesData.h2GalaxyUrl, "", "");
+        return connection;
     }
 
 
@@ -53,28 +63,34 @@ public class GalaxiesDAO implements Dao {
                 expedition.setId(results.getLong("id"));
                 expedition.setStatus(results.getString("status"));
                 expedition.setContractor(results.getString("contractor"));
-                expedition.setItinerary((Map<Galaxy, Double>) results.getObject("itinerary"));
+                expedition.setItinerary((Map<Galaxy, Double>) castToMap(results.getBytes("itinerary")));
+                expeditions.add(expedition);
+            }
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return expeditions;
+    }
+
+    @Override
+    public List<Galaxy> createMap(ResultSet results) {
+        List<Galaxy> galaxies = new ArrayList<>();
+        try {
+            while (results.next()) {
+                Galaxy galaxy = new Galaxy();
+                galaxy.setId(results.getLong("id"));
+                galaxy.setName(results.getString("name"));
+                galaxy.setType(GalaxyType.valueOf(results.getString("type")));
+                galaxy.setConstellation(results.getString("constellation"));
+                galaxy.setDistance(results.getDouble("distance"));
+                galaxy.setImage(results.getString("image"));
+                galaxies.add(galaxy);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
-    }
 
-    @Override
-    public List<Galaxy> createMap(ResultSet results) throws SQLException {
-        List<Galaxy> galaxies = new ArrayList<>();
-        while (results.next()) {
-            Galaxy galaxy = new Galaxy();
-            galaxy.setId(results.getLong("id"));
-            galaxy.setName(results.getString("name"));
-            galaxy.setType(GalaxyType.valueOf(results.getString("type")));
-            galaxy.setConstellation(results.getString("constellation"));
-            galaxy.setDistance(results.getDouble("distance"));
-            galaxy.setImage(results.getString("image"));
-            galaxies.add(galaxy);
-        }
         return galaxies;
     }
 
@@ -145,9 +161,14 @@ public class GalaxiesDAO implements Dao {
             ps.setString(1, expedition.getStatus());
             ps.setString(2, expedition.getContractor());
 
+            int expeditionCreated = ps.executeUpdate();
             try(ResultSet newId = ps.getGeneratedKeys()) {
                 newId.next();
-                expedition.setId(newId.getLong(1));
+                long expeditionId = newId.getLong(1);
+                expedition.setId(expeditionId);
+                System.out.println(String.format("%d expedition created with id = %d", expeditionCreated, expeditionId));
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
 
         } catch (SQLException e) {
@@ -164,13 +185,17 @@ public class GalaxiesDAO implements Dao {
             psSelect.setLong(1, id);
             ResultSet results = psSelect.executeQuery();
 
-            //results.next(); //ToDo ?
-            Map<Galaxy, Double> itinerary = (Map<Galaxy, Double>) results.getObject("itinerary");
+            results.next();
+
+            byte[] itineraryInBytes = results.getBytes("itinerary");
+
+            Map<Galaxy, Double> itinerary = castToMap(itineraryInBytes);
 
             itinerary.put(galaxy, galaxy.getDistance());
 
             psUpdate.setObject(1, itinerary);
             psUpdate.setLong(2, id);
+
             int updatedCount = psUpdate.executeUpdate();
 
             System.out.println(String.format("Updated %d row in expeditions table", updatedCount));
@@ -206,8 +231,8 @@ public class GalaxiesDAO implements Dao {
 
             ps.setLong(1, id);
             ResultSet results = ps.executeQuery();
-            //results.next(); // ToDo ?
-            Map<Galaxy, Double> expeditionMap = (Map<Galaxy, Double>) results.getObject(1);
+            results.next();
+            Map<Galaxy, Double> expeditionMap = castToMap(results.getBytes(1));
 
             distance = Expedition.getExpeditionDistance(expeditionMap);
 
@@ -220,6 +245,8 @@ public class GalaxiesDAO implements Dao {
 
     @Override
     public Expedition getExpedition(Long id) {
+
+        System.out.println("CALL getExpedition with id = " + id);
         Expedition expedition = null;
 
         try(Connection connection = getConnection();
@@ -228,18 +255,47 @@ public class GalaxiesDAO implements Dao {
             ps.setLong(1, id);
             ResultSet results = ps.executeQuery();
 
-            //results.next(); // ToDo ?
+            results.next();
 
             expedition = new Expedition();
             expedition.setId(results.getLong("id"));
             expedition.setContractor(results.getString("contractor"));
             expedition.setStatus(results.getString("status"));
-            expedition.setItinerary( (Map<Galaxy, Double>) results.getObject("itinerary"));
+            expedition.setItinerary( (Map<Galaxy, Double>) castToMap(results.getBytes("itinerary")));
 
         }catch (SQLException e) {
+            System.out.println("Here could be a problem");
             e.printStackTrace();
         }
 
         return expedition;
+    }
+
+    /**
+     *
+     * @param in
+     * @return Map of Galaxies and their distances
+     */
+    private Map<Galaxy, Double> castToMap(byte[] in){
+        Map<Galaxy, Double> itinerary = null;
+
+        if (in != null) {
+
+            ByteArrayInputStream bytes = new ByteArrayInputStream(in);
+
+            try(ObjectInputStream input = new ObjectInputStream(bytes)) {
+
+                itinerary = (Map<Galaxy, Double>) input.readObject();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+
+        } else
+            itinerary = new LinkedHashMap<>();
+
+        return itinerary;
     }
 }

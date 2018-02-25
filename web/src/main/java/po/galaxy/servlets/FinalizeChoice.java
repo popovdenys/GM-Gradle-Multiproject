@@ -4,8 +4,9 @@
  * 
  * Author : Popov Denys
  * Created : 01 Feb, 2018
- * 
- * Modified : 01 Feb, 2018
+ *
+ * Modified : { date: 24/02/18
+ *             ,time: 08:05 PM }
  * Modified by: Popov Denys
  * 
  * Last modification : page of redirect from post to get method 
@@ -46,6 +47,7 @@ public class FinalizeChoice extends HttpServlet {
 		GalaxiesDAO galaxiesDAO = GalaxiesDaoFactory.getGalaxiesDAO();
 
 		Double totalDistance = galaxiesDAO.getExpetionTotalDistance(expeditionId);
+
 		String status = galaxiesDAO.getExpedition(expeditionId).getStatus();
 
 		if (choosenGalaxies != null ) {

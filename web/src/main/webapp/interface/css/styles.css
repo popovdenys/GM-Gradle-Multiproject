@@ -1,7 +1,25 @@
+/*
+ * File : styles.css
+ * Description : page styles
+ *
+ * Author : Popov Denys
+ * Created : 24 Feb, 2018
+ *
+ * Modified : { date: 24/02/18
+ *             ,time: 08:09 PM }
+ * Modified by: Popov Denys
+ *
+ * Last modification : table's style
+ */
+
 body {
     background-color: skyblue;
 }
 
 table.status {
-    border: 1px solid skyblue;
+    border-collapse: collapse;
+}
+
+table.status, th, td {
+    border: 1px solid black;
 }
