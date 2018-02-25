@@ -3,7 +3,7 @@
  * Description : prepare json ajax response
  *
  * Author : Popov Denys
- * Created : 23 Feb, 2018
+ * Created : 23/02/18
  *
  * Modified : { date: 24/02/18
  *             ,time: 08:07 PM }

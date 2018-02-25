@@ -5,11 +5,11 @@
  * Author : Popov Denys
  * Created : 19/02/18
  *
- * Modified : { date: 19/02/18
- *             ,time: 10:46 PM }
+ * Modified : { date: 25/02/18
+ *             ,time: 02:25 PM }
  * Modified by: Popov Denys
  *
- * Last modification : welcome list of Galaxies
+ * Last modification : added async support
  */
 
 package po.galaxy.filters;
@@ -24,7 +24,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-@WebFilter("/*")
+@WebFilter(value = "/*", asyncSupported = true)
 public class RouteControlerFilter implements Filter {
 
     @Override

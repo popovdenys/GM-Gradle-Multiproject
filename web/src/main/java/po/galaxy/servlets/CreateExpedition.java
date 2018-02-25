@@ -3,9 +3,10 @@
  * Description : check Galaxies interface
  * 
  * Author : Popov Denys
- * Created : 01 Feb, 2018
- * 
- * Modified : 01 Feb, 2018
+ * Created : 01/02/18
+ *
+ * Modified : { date: 01/02/18
+ *             ,time: 08:07 PM }
  * Modified by: Popov Denys
  * 
  * Last modification : checkboxes interface 

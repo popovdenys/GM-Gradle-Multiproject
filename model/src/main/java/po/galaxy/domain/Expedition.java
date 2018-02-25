@@ -54,7 +54,7 @@ public class Expedition {
     public String toString() {
         StringBuilder b = new StringBuilder();
         for (Galaxy galaxy : itinerary.keySet()) {
-            b.append(galaxy.getName() + " : " + itinerary.get(galaxy) + "<br/>");
+            b.append("<br/>" + galaxy.getName() + " : " + itinerary.get(galaxy) + "(Mly)");
         }
         return b.toString();
     }
