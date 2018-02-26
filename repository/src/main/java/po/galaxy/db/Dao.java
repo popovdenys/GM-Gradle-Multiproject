@@ -20,6 +20,7 @@ import po.galaxy.domain.Galaxy;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 public interface Dao {
 
@@ -37,7 +38,7 @@ public interface Dao {
 
     public Expedition setExpedition(String contractor);
 
-    public void addToExpedition(Long id, Galaxy galaxy);
+    public Map<Galaxy, Double> addToExpedition(Long id, Galaxy galaxy);
 
     public void updateExpeditionStatus(Long id, String status);
 

@@ -1,5 +1,5 @@
 <%--
-  File : choosen.jsp
+  File : chooseExpedition.jsp
   Description : List of Galaxies to choose
 
   Author : Popov Denys

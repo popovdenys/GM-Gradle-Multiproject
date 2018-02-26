@@ -68,7 +68,8 @@
 
     <p>Total distance is ${totalDistance} mly</p>
 
-    <jsp:include page="footer.jsp"/> | <a href="processexpedition.html">Set new status</a>
+    <jsp:include page="footer.jsp"/> | <a href="updateExpeditionStatus.html">Set new status</a> <br/>
+    <a href="jsp/expeditions.jsp">Async expeditions list</a> | <a href="expeditionsProcessing.html">Websocket expeditions list</a>
 
 </body>
 </html>

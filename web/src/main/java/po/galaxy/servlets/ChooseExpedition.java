@@ -26,8 +26,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/choose.html")
-public class CreateExpedition extends HttpServlet {
+@WebServlet("/chooseExpedition.html")
+public class ChooseExpedition extends HttpServlet {
 
 	private static final long serialVersionUID = 2173022719737730840L;
 
@@ -38,7 +38,7 @@ public class CreateExpedition extends HttpServlet {
 		
 		request.setAttribute("galaxiesOfChoice", galaxies);
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/choose.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/chooseExpedition.jsp");
 
 		dispatcher.forward(request, response);
 		

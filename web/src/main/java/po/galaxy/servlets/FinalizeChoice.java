@@ -56,7 +56,7 @@ public class FinalizeChoice extends HttpServlet {
 			request.setAttribute("id", expeditionId);
 			dispatchToResultPage(request, response);
 		}
-		else  response.sendRedirect("choose.html");
+		else  response.sendRedirect("chooseExpedition.html");
 
 	}
 

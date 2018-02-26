@@ -38,7 +38,7 @@
                 ${expedition.contractor}
             </td>
             <td>
-                <form action="processexpedition.html" method="post">
+                <form action="updateExpeditionStatus.html" method="post">
 
                     <input type="hidden" name="id" value="${expedition.id}">
                     <div>

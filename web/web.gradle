@@ -23,6 +23,8 @@ configurations {
 dependencies {
     compile project(':repository')
 
+    compile 'org.apache.tomcat:tomcat-websocket:9.0.5'
+
     compile 'javax.servlet:jstl:1.2'
 
     compile 'org.json:json:20180130'

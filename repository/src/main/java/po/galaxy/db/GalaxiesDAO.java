@@ -178,7 +178,10 @@ public class GalaxiesDAO implements Dao {
     }
 
     @Override
-    public void addToExpedition(Long id, Galaxy galaxy) {
+    public Map<Galaxy, Double> addToExpedition(Long id, Galaxy galaxy) {
+
+        Map<Galaxy, Double> itinerary = null;
+
         try(Connection connection = getConnection();
         PreparedStatement psSelect = connection.prepareStatement("SELECT * FROM expeditions WHERE id = ?");
         PreparedStatement psUpdate = connection.prepareStatement( "UPDATE expeditions SET itinerary = ? WHERE id = ?");){
@@ -189,7 +192,7 @@ public class GalaxiesDAO implements Dao {
 
             byte[] itineraryInBytes = results.getBytes("itinerary");
 
-            Map<Galaxy, Double> itinerary = castToMap(itineraryInBytes);
+            itinerary = castToMap(itineraryInBytes);
 
             itinerary.put(galaxy, galaxy.getDistance());
 
@@ -203,6 +206,8 @@ public class GalaxiesDAO implements Dao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        return itinerary;
     }
 
     @Override

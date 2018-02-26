@@ -18,6 +18,8 @@ import po.galaxy.db.GalaxiesDAO;
 import po.galaxy.db.GalaxiesDaoFactory;
 import po.galaxy.domain.Expedition;
 import po.galaxy.domain.StatusType;
+import po.galaxy.websockets.ExpeditionsDisplaySessionHandler;
+import po.galaxy.websockets.ExpedtionsDisplaySessionHandlerFactory;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -29,7 +31,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet("/processexpedition.html")
+@WebServlet("/updateExpeditionStatus.html")
 public class UpdateExpeditionStatus extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -60,6 +62,12 @@ public class UpdateExpeditionStatus extends HttpServlet {
         String status = request.getParameter("status");
 
         galaxiesDAO.updateExpeditionStatus(id, status);
+
+        Expedition expedition = galaxiesDAO.getExpedition(id);
+        ExpeditionsDisplaySessionHandler handler = ExpedtionsDisplaySessionHandlerFactory.getHandler();
+
+        handler.amendExpedition(expedition);
+
         doGet(request, response);
 
     }

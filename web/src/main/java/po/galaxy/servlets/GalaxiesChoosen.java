@@ -19,6 +19,8 @@ import po.galaxy.db.GalaxiesDaoFactory;
 import po.galaxy.domain.Expedition;
 import po.galaxy.domain.Galaxy;
 import po.galaxy.domain.StatusType;
+import po.galaxy.websockets.ExpeditionsDisplaySessionHandler;
+import po.galaxy.websockets.ExpedtionsDisplaySessionHandlerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -42,8 +44,7 @@ public class GalaxiesChoosen extends HttpServlet {
 		
 		System.out.print("doPost->");
 		
-		HttpSession session = request.getSession();
-		
+
 		List<Galaxy> galaxies = galaxiesDAO.getGalaxiesList();
 
 		Expedition expedition = galaxiesDAO.setExpedition( request.getParameter("contractor") );
@@ -53,11 +54,18 @@ public class GalaxiesChoosen extends HttpServlet {
 					String status = request.getParameter("galaxy-" + g.getId());
 					return (status != null && status.equals("on")) ? true : false;
 				})
-				.peek(galaxy->galaxiesDAO.addToExpedition(expedition.getId(), galaxy))
+				.peek(galaxy->
+						expedition.setItinerary(
+								galaxiesDAO.addToExpedition(expedition.getId(), galaxy)
+						)
+				)
 				.collect(Collectors.toList());
 
-		System.out.println(String.format("New expedition's status %s", StatusType.PROJECT.get()));
+		System.out.println(String.format("A new expedition has been choosen with the status : %s", StatusType.PROJECT.get()));
+		ExpeditionsDisplaySessionHandler handler = ExpedtionsDisplaySessionHandlerFactory.getHandler();
+		handler.newExpedition(expedition);
 
+		HttpSession session = request.getSession();
 		session.setAttribute("choosenGalaxies", galaxiesOfChoice);
 		session.setAttribute("expeditionId", expedition.getId());
 		
