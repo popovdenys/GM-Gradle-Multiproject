@@ -20,7 +20,7 @@ import po.galaxy.domain.Expedition;
 import po.galaxy.domain.Galaxy;
 import po.galaxy.domain.StatusType;
 import po.galaxy.websockets.ExpeditionsDisplaySessionHandler;
-import po.galaxy.websockets.ExpedtionsDisplaySessionHandlerFactory;
+import po.galaxy.websockets.ExpeditionsDisplaySessionHandlerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -62,7 +62,7 @@ public class GalaxiesChoosen extends HttpServlet {
 				.collect(Collectors.toList());
 
 		System.out.println(String.format("A new expedition has been choosen with the status : %s", StatusType.PROJECT.get()));
-		ExpeditionsDisplaySessionHandler handler = ExpedtionsDisplaySessionHandlerFactory.getHandler();
+		ExpeditionsDisplaySessionHandler handler = ExpeditionsDisplaySessionHandlerFactory.getHandler();
 		handler.newExpedition(expedition);
 
 		HttpSession session = request.getSession();

@@ -19,7 +19,7 @@ import po.galaxy.db.GalaxiesDaoFactory;
 import po.galaxy.domain.Expedition;
 import po.galaxy.domain.StatusType;
 import po.galaxy.websockets.ExpeditionsDisplaySessionHandler;
-import po.galaxy.websockets.ExpedtionsDisplaySessionHandlerFactory;
+import po.galaxy.websockets.ExpeditionsDisplaySessionHandlerFactory;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -64,7 +64,7 @@ public class UpdateExpeditionStatus extends HttpServlet {
         galaxiesDAO.updateExpeditionStatus(id, status);
 
         Expedition expedition = galaxiesDAO.getExpedition(id);
-        ExpeditionsDisplaySessionHandler handler = ExpedtionsDisplaySessionHandlerFactory.getHandler();
+        ExpeditionsDisplaySessionHandler handler = ExpeditionsDisplaySessionHandlerFactory.getHandler();
 
         handler.amendExpedition(expedition);
 

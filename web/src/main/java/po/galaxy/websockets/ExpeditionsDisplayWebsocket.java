@@ -27,13 +27,13 @@ public class ExpeditionsDisplayWebsocket {
 
     @OnOpen
     public void open(Session session) {
-        ExpeditionsDisplaySessionHandler handler = ExpedtionsDisplaySessionHandlerFactory.getHandler();
+        ExpeditionsDisplaySessionHandler handler = ExpeditionsDisplaySessionHandlerFactory.getHandler();
         handler.addSessions(session);
     }
 
     @OnClose
     public void close(Session session) {
-        ExpeditionsDisplaySessionHandler handler = ExpedtionsDisplaySessionHandlerFactory.getHandler();
+        ExpeditionsDisplaySessionHandler handler = ExpeditionsDisplaySessionHandlerFactory.getHandler();
         handler.removeSessions(session);
     }
 
@@ -54,7 +54,7 @@ public class ExpeditionsDisplayWebsocket {
         galaxiesDAO.updateExpeditionStatus(id, status);
 
         Expedition expedition = galaxiesDAO.getExpedition(id);
-        ExpeditionsDisplaySessionHandler handler = ExpedtionsDisplaySessionHandlerFactory.getHandler();
+        ExpeditionsDisplaySessionHandler handler = ExpeditionsDisplaySessionHandlerFactory.getHandler();
 
         handler.amendExpedition(expedition);
     }

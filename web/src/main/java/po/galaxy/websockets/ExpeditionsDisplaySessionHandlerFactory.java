@@ -14,7 +14,7 @@
 
 package po.galaxy.websockets;
 
-public class ExpedtionsDisplaySessionHandlerFactory {
+public class ExpeditionsDisplaySessionHandlerFactory {
 
     private static ExpeditionsDisplaySessionHandler handler;
 
