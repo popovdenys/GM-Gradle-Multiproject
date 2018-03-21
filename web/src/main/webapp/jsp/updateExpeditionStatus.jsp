@@ -7,7 +7,7 @@
   Created : 23/02/18
 
   Modified : { date: 23/02/18
-              ,time: 08:17 PM }
+              ,time: 08:17App PM }
   Modified by: Popov Denys
 
   Last modification : update status form

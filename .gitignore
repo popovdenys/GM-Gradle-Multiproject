@@ -11,20 +11,20 @@ master/buildSrc/.gradle/
 master/.gradle/
 .gradle/
 
-# Maven (ToDo : split up between projects )
-target/
+# Maven
+**/target/
 
-# Eclipse (ToDo : split up between projects )
-bin/
+# Eclipse
+**/bin/
 .settings/
 .project
 .classpath
 
 # Idea
-.idea/
+**/.idea/
 **/*.iml
 *.ipr
 *.iws
 
-# reserve (ToDo : split up between projects )
-out/
+# reserve
+**/out/
